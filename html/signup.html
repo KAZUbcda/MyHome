@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>新規登録画面</title>
+    <link rel="stylesheet" href="../styles/signup.css">
+    <meta charset="utf-8" />
+	</head>
+
+	<body class="all" onload="form_get();">
+		<form method="post" action="index.html">
+			<div class="form">
+				<div class="form-title">新規会員登録</div>
+        <!-- 名前 -->
+				<div class="form-item">
+					<div class="form-context">名前</div>
+					<div class="form-need">必須</div>
+				</div>
+				<input type="nick_name" maxlength="100" placeholder="例)山田太郎" class="form-input-field" id="get_name">
+        <!-- メールアドレス -->
+				<div class="form-item">
+					<div class="form-context">メールアドレス</div>
+					<div class="form-need">必須</div>
+				</div>
+				<input type="text" maxlength="254" placeholder="例)sample@gmail.com" class="form-input-field" id="get_email">
+				<!-- パスワード -->
+				<div class="form-item">
+					<div class="form-context">パスワード</div>
+					<div class="form-need">必須</div>
+				</div>
+				<input type="password" maxlength="20" placeholder="半角英数8文字以上" class="form-input-field" id="get_password">
+				<!-- パスワード再入力 -->
+				<div class="form-item">
+					<div class="form-context">パスワード再入力</div>
+					<div class="form-need">必須</div>
+				</div>
+				<input type="password" maxlength="20" placeholder="半角英数8文字以上" class="form-input-field" id="get_re_password">
+				<!-- 会員登録ボタン -->
+				<button id="Registration_button" class="form-input-button">会員登録を行う</button>
+			</div>
+		</form>
+	</body>
+</html>
+
+<script src="user_form.js"></script>
