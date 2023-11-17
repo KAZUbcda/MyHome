@@ -1,0 +1,139 @@
+body{
+  background: rgb(255, 249, 199);
+  width: 1000px;
+  height: 1500px;
+  margin: 0 auto;
+}
+
+/* fadeUp */
+
+.fadeUp{
+	animation-name:fadeUpAnime;
+	animation-duration:2.0s;
+	animation-fill-mode:forwards;
+	opacity:0;
+	}
+	
+	@keyframes fadeUpAnime{
+		from {
+			opacity: 0;
+		transform: translateY(100px);
+		}
+	
+		to {
+			opacity: 1;
+		transform: translateY(0);
+		}
+	}
+	
+	
+	/* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+	 
+	.fadeUpTrigger{
+			opacity: 0;
+	}
+
+	/* --fadeUp-- */
+
+	/* fadeRight */
+
+	.fadeRight{
+		animation-name:fadeRightAnime;
+		animation-duration:3.0s;
+		animation-fill-mode:forwards;
+		opacity:0;
+		}
+		
+		@keyframes fadeRightAnime{
+			from {
+				opacity: 0;
+			transform: translateX(250px);
+			}
+		
+			to {
+				opacity: 1;
+			transform: translateX(0);
+			}
+		}
+
+	/* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+	 
+	.fadeRightTrigger{
+			opacity: 0;
+	}
+
+	/* --fadeRight-- */
+
+	.title{
+  width: 1000px;
+  text-align: center;
+	margin-top: 50px;
+}
+
+.cat{
+  width: 90%;
+  height: 90%;
+}
+
+.point-big{
+	font-size: 25px;
+	font-weight: bold;
+	padding: 0 30px;
+	margin: 70px 0;
+}
+
+.point{
+  display: flex;
+	margin-bottom: 55px;
+}
+
+.point1, .point1-name, .point2, .point2-name{
+	font-weight: bold;
+}
+
+.point1, .point2{
+	margin-right: 10px;
+	padding-top: 5px;
+	font-size: 20px;
+}
+
+.point1-name, .point2-name{
+	font-size: 25px;
+}
+
+.point-p{
+	font-size: 21px;
+	letter-spacing: 3px;
+	margin-bottom: 65px;
+}
+
+.start{
+	box-sizing: content-box;
+	margin-top: 85px;
+}
+
+a.btn {
+	font-weight: bold;
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	width: 100px;
+	margin: auto;
+	padding: 1rem 4rem;
+	border-radius: 100vw;
+	color: #fff;
+	background: #2f5af5;
+}
+a.btn:hover {
+	background-position: right center;
+	background-size: 200% auto;
+	-webkit-animation: pulse 2s infinite;
+	animation: shad 1.5s infinite;
+	color: #fff;
+}
+@keyframes shad {
+	0% {box-shadow: 0 0 0 0 #2f5af5;}
+	70% {box-shadow: 0 0 0 10px rgb(39 172 217 / 0%);}
+	100% {box-shadow: 0 0 0 0 rgb(39 172 217 / 0%);}
+}
