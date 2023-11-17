@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>お問い合わせ</title>
+    <link rel="stylesheet" href="../styles/login.css">
+    <meta charset="utf-8" />
+  </head>
+
+  <body class="all" onload="form_get();">
+		<form method="post" action="index.html">
+			<div class="form">
+				<div class="form-title">お問い合わせ</div>
+        <!-- メールアドレス -->
+				<div class="form-item">
+					<div class="form-context">メールアドレス</div>
+				</div>
+				<input type="text" maxlength="254" placeholder="例)sample@gmail.com" class="form-input-field" id="get_email">
+				<!-- カテゴリ -->
+				<div class="form-item">
+					<div class="form-context">カテゴリ</div>
+				</div>
+				<select id="category">
+          <option value="">カテゴリを選択</option>
+          <option value="0">銀行・カード連携</option>
+          <option value="1">残高・口座の管理</option>
+          <option value="2">家計簿の記録・設定</option>
+          <option value="3">家計簿の分析</option>
+          <option value="4">アカウントの管理</option>
+          <option value="5">その他</option>
+        </select>
+        <!-- サブカテゴリ -->
+        <div class="form-item">
+					<div class="form-context">サブカテゴリ</div>
+				</div>
+				<select id="sub_category">
+          <option value="">カテゴリを先に選択してください</option>
+        </select>
+        <!-- 本文 -->
+				<div class="form-item">
+					<div class="form-context">本文</div>
+				</div>
+				<textarea cols="50" rows="10"></textarea>
+				<!-- 送信ボタン -->
+				<div class="login_button">
+          <button id="Registration_button" class="form-input-button">
+            送信する
+          </button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
+
+<script src="../script/category.js"></script>
