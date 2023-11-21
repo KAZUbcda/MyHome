@@ -3,10 +3,12 @@
   <head>
     <title>お問い合わせ</title>
     <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/header.css">
     <meta charset="utf-8" />
   </head>
 
   <body class="all" onload="form_get();">
+    <header id="header"></header>
 		<form method="post" action="index.html">
 			<div class="form">
 				<div class="form-title">お問い合わせ</div>
@@ -41,7 +43,7 @@
 				</div>
 				<textarea cols="50" rows="10"></textarea>
 				<!-- 送信ボタン -->
-				<div class="login_button">
+				<div class="send_button">
           <button id="Registration_button" class="form-input-button">
             送信する
           </button>
@@ -52,3 +54,4 @@
 </html>
 
 <script src="../script/category.js"></script>
+<script src="../script/header.js"></script>
