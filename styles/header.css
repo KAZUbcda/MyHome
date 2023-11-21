@@ -1,0 +1,46 @@
+.header_container{
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  height: 10vh;
+}
+
+.header_left{
+  /* display: flex; */
+  align-items: center;
+  font-size: 50px;
+  width: 50vw;
+  font-family:'Comic Sans MS';
+  
+}
+
+.header_left a{
+  color: rgb(255, 182, 127);
+}
+
+.header_title{
+  margin-left: 50px;
+}
+
+.header_right{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50vw;
+  padding-left: 500px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.signup_botton,
+.header_login_button,
+.logout_botton{
+  background-color: white;
+  font-size: 18px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 0 10px 0 10px;
+}
