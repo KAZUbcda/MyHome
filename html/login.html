@@ -9,9 +9,11 @@
 
 	<body class="all" onload="form_get();">
 		<header id="header"></header>
-		<form method="post" action="index.html">
+		<form id="loginForm">
 			<div class="form">
 				<div class="form-title">ログイン</div>
+				<!-- ログイン結果表示枠 -->
+				<div id="result"></div>
         <!-- メールアドレス -->
 				<div class="form-item">
 					<div class="form-context">メールアドレス</div>
@@ -25,7 +27,7 @@
         <div class="forget_password"><a href="#">パスワードを忘れた方はこちら</a></div>
 				<!-- ログインボタン -->
 				<div class="login_button">
-          <button id="Registration_button" class="form-input-button">
+          <button type="button" id="Registration_button" class="form-input-button" onclick="login()">
             ログイン
           </button>
         </div>
@@ -36,5 +38,5 @@
 	</body>
 </html>
 
-<script src="user_form.js"></script>
 <script src="../script/header.js"></script>
+<script src="../script/login.js"></script>
