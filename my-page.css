@@ -1,0 +1,12 @@
+body{
+  background: rgb(255, 249, 199);
+  width: 1000px;
+  height: 900px;
+  margin: 0 auto;
+}
+
+.title{
+  padding: 10px 0;
+  font-size: 50px;
+  font-weight: bold;
+}
