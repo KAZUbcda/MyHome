@@ -1,0 +1,13 @@
+#result{
+  position: absolute;
+  top: 100;
+  left: 0;
+  right: 0;
+  border: 0;
+  background: var(--cp-color-1);
+  display: block;
+  overflow: hidden;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+}

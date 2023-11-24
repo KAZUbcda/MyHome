@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>MY HOME ~家計簿マイページ~</title>
+
+  <link rel="stylesheet" type="text/css" href="my-page.css">
+  <link rel="stylesheet" media="screen" href="my-page-frame.css">
+
+</head>
+
+<body class="">
+
+  <div class="title">My 家計簿</div>
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe id="result" scrolling="no" srcdoc="<!DOCTYPE html>
+      <html lang='en' >
+      
+      <head> 
+        <meta charset='UTF-8'>
+           
+        <title>CodePen - 簡易家計簿アプリ～完成版デモ～</title>
+             
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css'>
+
+        <link rel='stylesheet' media='screen' href='my-page-frame-set.css'>
+              
+        <script>
+           window.console = window.console || function(t) {};
+        </script>
+      
+      </head>
+
+      <body translate=&quot;no&quot;>
+         <div id=&quot;app&quot;>
+         <h1 class=&quot;title&quot;>あなたの家計簿</h1>
+         <div class=&quot;columns&quot;>
+           <div class=&quot;column&quot;>
+             <label class=&quot;label&quot;>日付</label>
+             <input class=&quot;input&quot; type=&quot;date&quot; v-model=&quot;newItemDate&quot;>
+           </div>
+           <div class=&quot;column&quot;>
+             <label class=&quot;label&quot;>項目</label>
+             <input class=&quot;input&quot; type=&quot;text&quot; v-model=&quot;newItemName&quot;>
+           </div>
+           <div class=&quot;column&quot;>
+             <label class=&quot;label&quot;>金額</label>
+             <input class=&quot;input&quot; type=&quot;number&quot; v-model=&quot;newItemPrice&quot;>
+           </div>
+           <div class=&quot;column&quot;>
+             <button class=&quot;button is-primary&quot; v-on:click=&quot;addNewItem&quot;>追加</button>
+           </div>
+         </div>
+         <table class=&quot;table&quot; v-if=&quot;items.length&quot;>
+           <thead>
+             <tr>
+              <th>日付</th>
+              <th>項目</th>
+              <th>金額</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr v-for=&quot;(item, index) in items&quot;>
+               <td>{{ item.date }}</td>
+               <td>{{ item.name }}</td>
+               <td>{{ item.price }} 円</td>
+               <td class=&quot;td-right&quot;><button class=&quot;button is-danger&quot; v-on:click=&quot;deleteItem(index)&quot;>削除</button></td>
+             </tr>
+           </tbody>
+           <tfoot>
+             <th></th>
+             <th>合計</th>
+             <th>{{ getItemTotalPrice() }} 円</th>
+           </tfoot>
+         </table>
+        </div>
+         <script src='https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js'></script>  
+          <script id=&quot;rendered-js&quot; >
+          const app = new Vue({
+            el: &quot;#app&quot;,
+            data: {
+              newItemDate: null,
+              newItemName: &quot;&quot;,
+              newItemPrice: 0,
+              items: [] },
+              
+            methods: {
+              /**
+                * 日付と項目の入力チェック結果を取得
+                * @returns {boolean}
+                */
+              checkNewItem: function () {
+                return this.newItemDate && this.newItemName ? true : false;
+                },
+                /**
+                  * エラーメッセージを取得
+                  * @returns {string} エラーメッセージ
+                  */
+                getErrorMessage: function () {
+                  let message = &quot;&quot;;
+                  if (!this.newItemDate) {
+                    message += &quot;日付を入力してください\n&quot;;
+                  }
+                  if (!this.newItemName) {
+                    message += &quot;項目を入力してください\n&quot;;
+                  }
+                  return message;
+                },
+                /**
+                  * 入力フォームを初期化
+                  */ clearNewItem: function () {
+                      this.newItemDate = null;
+                      this.newItemName = &quot;&quot;;
+                      this.newItemPrice = 0;
+                    },
+                    /**
+                      * 入力フォームからアイテムを取得
+                      * @returns {Object} アイテム
+                      */
+                    getNewItem: function () {
+                      return {
+                        date: this.newItemDate,
+                        name: this.newItemName,
+                        price: this.newItemPrice };
+                    },
+                    /**
+                      * アプリケーションがロードされたときにlocalStorageからデータを読み込む
+                      */
+                    loadItemsFromLocalStorage: function () {
+                      const storedItems = localStorage.getItem(&quot;items&quot;);
+                      if (storedItems) {
+                        this.items = JSON.parse(storedItems);
+                      }
+                    },
+                    /**
+                      * アイテムをリストに追加
+                      */
+                    addNewItem: function () {
+                      if (!this.checkNewItem()) {
+                        let message = this.getErrorMessage();
+                        if (message) alert(message);
+                        return;
+                      }
+                      this.items.push(this.getNewItem());
+                      this.clearNewItem();
+                      this.saveItemsToLocalStorage();
+                    },
+                    /**
+                      * アイテムをリストから削除
+                      */
+                    deleteItem: function (index) {
+                        this.items.splice(index, 1);
+                        this.saveItemsToLocalStorage();
+                      },
+                    /**
+                      * アイテムリスト内の合計金額を取得
+                      * @returns {number} アイテムリスト内の合計金額
+                      */
+                    getItemTotalPrice: function () {
+                      let total = 0;
+                      for (let item of this.items) {
+                        total += Number(item.price);
+                      }
+                      return total;
+                    },
+                    /**
+                      * アプリケーションが終了するときにlocalStorageにデータを保存
+                      */
+                    saveItemsToLocalStorage: function () {
+                      localStorage.setItem('items', JSON.stringify(this.items));
+                    }
+                  },
+                  /**
+                    * アプリケーションがマウントされたときにlocalStorageからデータを読み込む
+                    */
+                  mounted: function () {
+                    this.loadItemsFromLocalStorage();
+                  }
+                  });
+          </script>
+                        
+        </body>
+                  
+        </html>
+        " sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-downloads allow-presentation" allow="accelerometer; camera; encrypted-media; display-capture; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write; web-share" allowtransparency="true" allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+</html>
