@@ -101,7 +101,7 @@ document.getElementById("Registration_button").onclick = function() {
 
         // 登録が成功したらログインページに遷移
         //window.location.href = 'login.html';
-				window.location.href = '../html/login.html';
+				window.location.href = '../my-page.html';
       }
     }
   }
