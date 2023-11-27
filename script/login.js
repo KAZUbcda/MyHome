@@ -45,7 +45,7 @@ function login() {
     // ログイン成功時の処理（例: マイページへの遷移）
     //マイページが完成するまでトップページに遷移
     // window.location.href = 'mypage.html';
-    window.location.href = '../index.html';
+    window.location.href = '../my-page.html';
   } else {
     resultDiv.innerHTML = `<p style="color: red;">メールアドレスまたはパスワードが正しくありません。</p>`;
     // ログイン失敗時の処理
