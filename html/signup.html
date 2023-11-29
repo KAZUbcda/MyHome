@@ -8,20 +8,20 @@
     <meta charset="utf-8" />
 	</head>
 
-	<body class="all" onload="form_get();">
+	<body>
 		<!-- ヘッダー -->
 		<header id="header"></header>
 		<!-- ヘッダーここまで -->
-		<form>
+		<div class="main">
 			<div class="form">
 				<div class="form-title">新規会員登録</div>
-        <!-- 名前 -->
+      	<!-- 名前 -->
 				<div class="form-item">
 					<div class="form-context">名前</div>
 					<div class="form-need">必須</div>
 				</div>
 				<input type="nick_name" maxlength="100" placeholder="例)山田太郎" class="form-input-field" id="get_name">
-        <!-- メールアドレス -->
+      	<!-- メールアドレス -->
 				<div class="form-item">
 					<div class="form-context">メールアドレス</div>
 					<div class="form-need">必須</div>
@@ -42,9 +42,9 @@
 				<!-- 会員登録ボタン -->
 				<button type="button" id="Registration_button" class="form-input-button">会員登録を行う</button>
 				<!-- ログイン画面へのリンク -->
-        <div class="login_link"><a href="login.html">会員登録がお済みの方はこちら</a></div>
+      	<div class="login_link"><a href="login.html">会員登録がお済みの方はこちら</a></div>
 			</div>
-		</form>
+		</div>
 	</body>
 </html>
 
