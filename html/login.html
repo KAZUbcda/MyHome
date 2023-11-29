@@ -8,34 +8,37 @@
     <meta charset="utf-8" />
 	</head>
 
-	<body class="all" onload="form_get();">
+	<!-- <body class="all" onload="form_get();"> -->
+	<body>
 		<header id="header"></header>
-		<form id="loginForm">
-			<div class="form">
-				<div class="form-title">ログイン</div>
-				<!-- ログイン結果表示枠 -->
-				<div id="result"></div>
-        <!-- メールアドレス -->
-				<div class="form-item">
-					<div class="form-context">メールアドレス</div>
+		<div class="main">
+			<form id="loginForm">
+				<div class="form">
+					<div class="form-title">ログイン</div>
+					<!-- ログイン結果表示枠 -->
+					<div id="result"></div>
+        	<!-- メールアドレス -->
+					<div class="form-item">
+						<div class="form-context">メールアドレス</div>
+					</div>
+					<input type="text" maxlength="254" placeholder="例)sample@gmail.com" class="form-input-field" id="get_email">
+					<!-- パスワード -->
+					<div class="form-item">
+						<div class="form-context">パスワード</div>
+					</div>
+					<input type="password" maxlength="20" placeholder="半角英数字8文字以上" class="form-input-field" id="get_password">
+        	<div class="forget_password"><a href="#">パスワードを忘れた方はこちら</a></div>
+					<!-- ログインボタン -->
+					<div class="login_button">
+          	<button type="button" id="Registration_button" class="form-input-button" onclick="login()">
+            	ログイン
+          	</button>
+        	</div>
+        	<!-- 新規登録画面へのリンク -->
+        	<div class="signup_link"><a href="signup.html">会員登録がお済みでない方はこちら</a></div>
 				</div>
-				<input type="text" maxlength="254" placeholder="例)sample@gmail.com" class="form-input-field" id="get_email">
-				<!-- パスワード -->
-				<div class="form-item">
-					<div class="form-context">パスワード</div>
-				</div>
-				<input type="password" maxlength="20" placeholder="半角英数字8文字以上" class="form-input-field" id="get_password">
-        <div class="forget_password"><a href="#">パスワードを忘れた方はこちら</a></div>
-				<!-- ログインボタン -->
-				<div class="login_button">
-          <button type="button" id="Registration_button" class="form-input-button" onclick="login()">
-            ログイン
-          </button>
-        </div>
-        <!-- 新規登録画面へのリンク -->
-        <div class="signup_link"><a href="signup.html">会員登録がお済みでない方はこちら</a></div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</body>
 </html>
 
