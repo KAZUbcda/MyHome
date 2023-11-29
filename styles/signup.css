@@ -38,4 +38,31 @@
   margin-top: 30px;
   background-color: orange;
   height: 50px;
+  transition: 0.2s;
+  border: 4px outset rgb(249, 220, 168);
+}
+
+button:hover{
+  background-color: deepskyblue;
+  color: white;
+  border: 4px outset rgb(158, 231, 255);
+}
+
+button:active{
+  background-color: deepskyblue;
+  color: white;
+  border: 4px inset rgb(158, 231, 255);
+}
+
+/* ログイン画面へのリンクについて */
+/* 通常は下線を表示せず、文字は黒 */
+.login_link a{
+  text-decoration: none;
+  color: black;
+}
+
+/* ログイン画面へのリンクについて */
+/* マウスカーソルを重ねると下線を表示 */
+.login_link a:hover {
+  text-decoration: underline;
 }

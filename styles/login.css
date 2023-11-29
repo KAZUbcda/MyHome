@@ -12,7 +12,7 @@
   background-color: white;
   border:1px solid black;
   /* width: 200px; */
-  padding: 20px 70px 20px 70px;
+  padding: 10px 70px 10px 70px;
 }
 
 .form-title{
@@ -26,7 +26,7 @@
 .form-item{
   display: flex;
   font-size: 18px;
-  margin: 40px 0 0 0;
+  margin: 20px 0 0 0;
 }
 
 .form-need{
@@ -35,6 +35,12 @@
   margin-left: 6px;
   border-radius: 4px;
 }
+textarea{
+  overflow: auto;
+  /* box-sizing: initial; */
+  box-sizing: content-box;
+  caret-color: black; /* カーソルの色を指定 */
+}
 
 .form-input-button{
   font-size: large;
@@ -42,5 +48,36 @@
   margin: 30px 0 0 0;
   background-color: orange;
   height: 50px;
+  transition: 0.2s;
   width: 120px;
+  border: 4px outset rgb(249, 220, 168);
+}
+
+.login_button button:hover,
+.send_button button:hover{
+  background-color: deepskyblue;
+  color: white;
+  border: 4px outset rgb(158, 231, 255);
+}
+
+.login_button button:active,
+.send_button button:active{
+  background-color: deepskyblue;
+  color: white;
+  border: 4px inset rgb(158, 231, 255);
+}
+
+/* 新規登録とパスワードを忘れた方画面へのリンクについて */
+/* 通常は下線を表示せず、文字は黒 */
+.signup_link a,
+.forget_password a {
+  text-decoration: none;
+  color: black;
+}
+
+/* 新規登録とパスワードを忘れた方画面へのリンクについて */
+/* マウスカーソルを重ねると下線を表示 */
+.signup_link a:hover,
+.forget_password a:hover {
+  text-decoration: underline;
 }

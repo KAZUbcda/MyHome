@@ -3,6 +3,8 @@
   justify-content: space-around;
   width: 100vw;
   height: 10vh;
+  background-color: rgb(219, 247, 177);
+  margin-bottom: 20px;
 }
 
 .header_left{
@@ -16,6 +18,7 @@
 
 .header_left a{
   color: rgb(255, 182, 127);
+  text-decoration: none;
 }
 
 .header_title{
@@ -30,9 +33,18 @@
   padding-left: 500px;
 }
 
-a{
+.header_right a{
   text-decoration: none;
   color: black;
+}
+
+.contact_button:hover{
+  text-decoration:underline;
+}
+
+/* お問い合わせリンク */
+.contact_button{
+  font-size: 18px;
 }
 
 .signup_botton,
@@ -43,4 +55,11 @@ a{
   border: 1px solid gray;
   border-radius: 6px;
   padding: 0 10px 0 10px;
+  transition: 0.2s;
+}
+
+.signup_botton:hover,
+.header_login_button:hover,
+.logout_botton:hover{
+  background-color: orange;
 }

@@ -4,12 +4,13 @@
     <title>お問い合わせ</title>
     <link rel="stylesheet" href="../styles/login.css">
     <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/reset.css">
     <meta charset="utf-8" />
   </head>
 
   <body class="all" onload="form_get();">
     <header id="header"></header>
-		<form method="post" action="index.html">
+		<form>
 			<div class="form">
 				<div class="form-title">お問い合わせ</div>
         <!-- メールアドレス -->
@@ -41,10 +42,10 @@
 				<div class="form-item">
 					<div class="form-context">本文</div>
 				</div>
-				<textarea cols="50" rows="10"></textarea>
+				<textarea cols="45" rows="8" placeholder="ここにテキストを入力してください"></textarea>
 				<!-- 送信ボタン -->
 				<div class="send_button">
-          <button id="Registration_button" class="form-input-button">
+          <button type="button" id="Registration_button" class="form-input-button">
             送信する
           </button>
         </div>
