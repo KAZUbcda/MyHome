@@ -111,6 +111,82 @@
   <script>
   var ctx = document.getElementById("myChart");
   var myBar;
+
+  // ページが読み込まれた時に実行されるコード
+  $(document).ready(function() {
+      // ローカルストレージからデータを取得
+      var storedIncomeData = localStorage.getItem('incomeData');
+      var storedExpenseData = localStorage.getItem('expenseData');
+
+      // データが存在するか確認
+      if (storedIncomeData && storedExpenseData) {
+        // JSON.parseを使用して文字列から元のデータ型に変換
+        var incomeData = JSON.parse(storedIncomeData);
+        var expenseData = JSON.parse(storedExpenseData);
+
+        // フォームの初期化
+        $('.ji').val(incomeData[0]);
+        $('.fi').val(incomeData[1]);
+        $('.mi').val(incomeData[2]);
+        $('.ai').val(incomeData[3]);
+        $('.myi').val(incomeData[4]);
+        $('.jni').val(incomeData[5]);
+
+        $('.jyi').val(expenseData[0]);
+        $('.ati').val(expenseData[1]);
+        $('.si').val(expenseData[2]);
+        $('.oi').val(expenseData[3]);
+        $('.ni').val(expenseData[4]);
+        $('.di').val(expenseData[5]);
+
+        // グラフの設定
+        myBar = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ["1月", "2月", "3月", "4月", "5月", "6月"],
+            datasets: [
+              {
+                label: "あなたの収入",
+                data: incomeData,
+                backgroundColor: [
+                  "#3fcf3f",
+                  "#3fcf3f",
+                  "#3fcf3f",
+                  "#3fcf3f",
+                  "#3fcf3f",
+                  "#3fcf3f"
+                ]
+              },
+              {
+                label: "あなたの支出",
+                data: expenseData,
+                backgroundColor: [
+                  "#ff6347",
+                  "#ff6347",
+                  "#ff6347",
+                  "#ff6347",
+                  "#ff6347",
+                  "#ff6347"
+                ]
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  suggestedMin: 0
+                }
+              }]
+            },
+            responsive: true
+          }
+        });
+      } else {
+        console.log("データがありません。");
+      }
+    });
+
   // ボタンをクリックした時
   $('.complete-btn').click(function(){
 
@@ -177,7 +253,16 @@
         responsive: true
       }
     });
-  })
+    // データをlocalStorageに保存
+    saveToLocalStorage('incomeData', [ji, fi, mi, ai, myi, jni]);
+    saveToLocalStorage('expenseData', [jyi, ati, si, oi, ni, di]);
+});
+
+    // localStorageにデータを保存する関数
+    function saveToLocalStorage(key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+
   </script>
 </body>
 </html>
