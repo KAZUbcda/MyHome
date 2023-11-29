@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>chart</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="../styles/my-chart.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+  <div class="input-area">
+    <div class="input-area__inner blue">
+      <div class="form-title">
+        <p>収入 <span>7月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart ji" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>収入 <span>8月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart fi" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>収入 <span>9月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart mi" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>収入 <span>10月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart ai" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>収入 <span>11月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart myi" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>収入 <span>12月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart jni" type="number" value="0">
+        <span>円</span>
+      </div>
+      <button class="complete-btn">入力完了</button>
+    </div>
+    <div class="input-area__inner yellow">
+      <div class="form-title">
+        <p>支出 <span>7月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart jyi" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>支出 <span>8月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart ati" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>支出 <span>9月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart si" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>支出 <span>10月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart oi" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>支出 <span>11月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart ni" type="number" value="0">
+        <span>円</span>
+      </div>
+      <div class="form-title">
+        <p>支出 <span>12月</span></p>
+      </div>
+      <div class="side">
+        <input class="chart di" type="number" value="0">
+        <span>円</span>
+      </div>
+      <button class="complete-btn">入力完了</button>
+    </div>
+    
+  </div>
+  
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+
+  <script>
+  var ctx = document.getElementById("myChart");
+  var myBar;
+  // ボタンをクリックした時
+  $('.complete-btn').click(function(){
+
+    // 入力値を取得して、変数に代入
+    var ji = parseFloat($('.ji').val()) || 0;
+    var fi = parseFloat($('.fi').val()) || 0;
+    var mi = parseFloat($('.mi').val()) || 0;
+    var ai = parseFloat($('.ai').val()) || 0;
+    var myi = parseFloat($('.myi').val()) || 0;
+    var jni = parseFloat($('.jni').val()) || 0;
+
+    var jyi = parseFloat($('.jyi').val()) || 0;
+    var ati = parseFloat($('.ati').val()) || 0;
+    var si = parseFloat($('.si').val()) || 0;
+    var oi = parseFloat($('.oi').val()) || 0;
+    var ni = parseFloat($('.ni').val()) || 0;
+    var di = parseFloat($('.di').val()) || 0;
+
+    // グラフが既に存在する場合は破棄
+    if (myBar) {
+      myBar.destroy();
+    }
+
+    // グラフの設定
+    var myBar = new Chart(ctx, {
+
+      // 棒グラフ
+      type: 'bar',
+      data: {
+        labels: ["7月", "8月", "9月", "10月", "11月", "12月"],
+        datasets: [{
+              label: "あなたの収入",
+              data: [ji, fi, mi, ai, myi, jni],
+              backgroundColor: [
+                "#4169e1",
+                "#4169e1",
+                "#4169e1",
+                "#4169e1",
+                "#4169e1",
+                "#4169e1"
+              ]
+            },{
+              label: "あなたの支出",
+              data: [jyi, ati, si, oi, ni, di],
+              backgroundColor: [
+                "#ffa500",
+                "#ffa500",
+                "#ffa500",
+                "#ffa500",
+                "#ffa500",
+                "#ffa500"
+              ]
+            },
+        ],
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMin: 0
+            }
+          }]
+        },
+        responsive: true
+      }
+    });
+  })
+  </script>
+</body>
+</html>

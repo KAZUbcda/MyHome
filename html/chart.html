@@ -3,33 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>bar chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1"></script>
-    <script>
-      window.onload = function () {
-        let context = document.querySelector("#japanese_people_chart").getContext('2d')
-        new Chart(context, {
-          type: 'bar',
-          data: {
-            labels: ['7月', '8月', '9月', '10月', '11月', '12月'],
-            datasets: [{
-              label: "あなたの収入",
-              data: [220000, 210000, 230000, 190000, 220000, 210000],
-              backgroundColor: ['#4169e1']
-            },{
-              label: "あなたの支出",
-              data: [160000, 160000, 140000, 150000, 110000, 140000],
-              backgroundColor: ['#ffa500']
-            }],
-          },
-          options: {
-            responsive: true
-          }
-        })
-      }
-    </script>
+    <link rel="stylesheet" type="text/css" href="../styles/chart.css">
   </head>
   <body>
-    <div>収支グラフ</div>
-    <canvas id="japanese_people_chart" height="500px" width="1500px"></canvas>
+    <div class="title">収支グラフ</div>
+    <div class="semi">上半期</div>
+    <iframe src="chart1.html" scrolling="no" ></iframe>
+    <div class="semi">下半期</div>
+    <iframe src="chart2.html" scrolling="no"></iframe>
   </body>
 </html>
