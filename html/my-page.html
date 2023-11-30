@@ -15,7 +15,7 @@
   <div class="title">My 家計簿</div>
 
   <div id="result-iframe-wrap" role="main">
-    <iframe id="result" scrolling="no" srcdoc="<!DOCTYPE html>
+    <iframe id="result" srcdoc="<!DOCTYPE html>
       <html lang='en' >
       
       <head> 
@@ -34,6 +34,15 @@
       <body translate=&quot;no&quot;>
          <div id=&quot;app&quot;>
          <h1 class=&quot;title&quot;>あなたの家計簿</h1>
+         <div class=&quot;monthly-totals&quot;>
+          <h2>月ごとの合計金額</h2>
+          <ul>
+            <li v-for=&quot;(total, month) in monthlyTotals&quot; :key=&quot;month&quot;>
+              {{ month }}: {{ total }} 円
+            </li>
+          </ul>
+        </div>
+        <button class=&quot;button is-danger&quot; v-on:click=&quot;clearAllData&quot;>一括リセット</button>
          <div class=&quot;columns&quot;>
            <div class=&quot;column&quot;>
              <label class=&quot;label&quot;>日付</label>
@@ -51,7 +60,7 @@
              <button class=&quot;button is-primary&quot; v-on:click=&quot;addNewItem&quot;>追加</button>
            </div>
          </div>
-         <table class=&quot;table&quot; v-if=&quot;items.length&quot;>
+         <table class=&quot;table&quot; v-if=&quot;Object.keys(organizedItemsByMonth).length&quot;>
            <thead>
              <tr>
               <th>日付</th>
@@ -60,16 +69,21 @@
              </tr>
            </thead>
            <tbody>
-             <tr v-for=&quot;(item, index) in items&quot;>
+             <template v-for=&quot;(monthItems, month) in organizedItemsByMonth&quot;>
+             <tr :key=&quot;month&quot;>
+               <td colspan=&quot;3&quot; class=&quot;month-header&quot;>{{ month }}　　合計: {{ monthlyTotals[month] }} 円</td>
+             </tr>
+             <tr v-for=&quot;item in monthItems&quot; :key=&quot;item.date&quot;>
                <td>{{ item.date }}</td>
                <td>{{ item.name }}</td>
                <td>{{ item.price }} 円</td>
-               <td class=&quot;td-right&quot;><button class=&quot;button is-danger&quot; v-on:click=&quot;deleteItem(index)&quot;>削除</button></td>
+               <td class=&quot;td-right&quot;><button class=&quot;button is-danger&quot; v-on:click=&quot;deleteItem(items.indexOf(item))&quot;>削除</button></td>
              </tr>
+             </template>
            </tbody>
            <tfoot>
              <th></th>
-             <th>合計</th>
+             <th>支出総額</th>
              <th>{{ getItemTotalPrice() }} 円</th>
            </tfoot>
          </table>
@@ -82,8 +96,25 @@
               newItemDate: null,
               newItemName: &quot;&quot;,
               newItemPrice: 0,
-              items: [] },
-              
+              items: [],
+              monthlyTotals: {} },
+            
+              /**
+                * 表を月ごとに切り替える
+                */
+              computed: {
+                organizedItemsByMonth: function () {
+                  const organizedItems = {};
+                  for (const item of this.items) {
+                    const monthYear = new Date(item.date).toLocaleString(&quot;en-US&quot;, { year: &quot;numeric&quot;, month: &quot;numeric&quot; });
+                    if (!organizedItems[monthYear]) {
+                      organizedItems[monthYear] = [];
+                    }
+                    organizedItems[monthYear].push(item);
+                  }
+                  return organizedItems;
+                }
+              },
             methods: {
               /**
                 * 日付と項目の入力チェック結果を取得
@@ -105,6 +136,17 @@
                     message += &quot;項目を入力してください\n&quot;;
                   }
                   return message;
+                },
+                /**
+                  * データの一括リセット機能
+                  */
+                clearAllData: function () {
+                  if (confirm(&quot;本当にすべてのデータをリセットしますか？&quot;)) {
+                    localStorage.removeItem(&quot;items&quot;);
+                    localStorage.removeItem(&quot;monthlyTotals&quot;);
+                    this.items = [];
+                    this.monthlyTotals = {};
+                  }
                 },
                 /**
                   * 入力フォームを初期化
@@ -141,7 +183,9 @@
                         if (message) alert(message);
                         return;
                       }
-                      this.items.push(this.getNewItem());
+                      const newItem = this.getNewItem();
+                      this.items.push(newItem);
+                      this.updateMonthlyTotal(newItem.date, newItem.price);
                       this.clearNewItem();
                       this.saveItemsToLocalStorage();
                     },
@@ -164,18 +208,33 @@
                       return total;
                     },
                     /**
+                      * 月ごとの合計金額
+                      */
+                    updateMonthlyTotal: function (date, price) {
+                      const monthYear = new Date(date).toLocaleString(&quot;en-US&quot;, { year: &quot;numeric&quot;, month: &quot;numeric&quot; });
+                      if (!this.monthlyTotals[monthYear]) {
+                        this.monthlyTotals[monthYear] = 0;
+                      }
+                      this.monthlyTotals[monthYear] += Number(price);
+                    },
+                    /**
                       * アプリケーションが終了するときにlocalStorageにデータを保存
                       */
                     saveItemsToLocalStorage: function () {
                       localStorage.setItem('items', JSON.stringify(this.items));
+                      localStorage.setItem('monthlyTotals', JSON.stringify(this.monthlyTotals));
                     }
                   },
                   /**
                     * アプリケーションがマウントされたときにlocalStorageからデータを読み込む
                     */
-                  mounted: function () {
-                    this.loadItemsFromLocalStorage();
-                  }
+                    mounted: function () {
+                      this.loadItemsFromLocalStorage();
+                      const storedMonthlyTotals = localStorage.getItem('monthlyTotals');
+                      if (storedMonthlyTotals) {
+                        this.monthlyTotals = JSON.parse(storedMonthlyTotals);
+                      }
+                    },
                   });
           </script>
                         
