@@ -1,8 +1,9 @@
-.all{
-  background-color: rgb(255, 249, 199);
+.main{
+  /* background-color: rgb(255, 249, 199); */
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: space-around;
 }
 
 .form{
@@ -13,6 +14,7 @@
   border:1px solid black;
   /* width: 600px */
   padding: 20px 100px 20px 100px;
+  margin: 0 500px 0 500px;
 }
 
 .form-title{
