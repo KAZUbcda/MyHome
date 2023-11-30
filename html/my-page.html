@@ -34,32 +34,58 @@
       <body translate=&quot;no&quot;>
          <div id=&quot;app&quot;>
          <h1 class=&quot;title&quot;>あなたの家計簿</h1>
+         <button class=&quot;button is-danger&quot; v-on:click=&quot;clearAllData&quot;>一括リセット</button>
+         <div class=&quot;income-form&quot;>
+          <h2>収入の記録</h2>
+          <div class=&quot;columns&quot;>
+            <div class=&quot;column&quot;>
+              <label class=&quot;label&quot;>月</label>
+              <input class=&quot;input&quot; type=&quot;text&quot; placeholder=&quot;mm / yyyy&quot; v-model=&quot;newIncomeMonth&quot;>
+            </div>
+            <div class=&quot;column&quot;>
+              <label class=&quot;label&quot;>金額</label>
+              <input class=&quot;input&quot; type=&quot;number&quot; v-model=&quot;newIncomeAmount&quot;>
+            </div>
+            <div class=&quot;column&quot;>
+              <button class=&quot;button is-primary&quot; v-on:click=&quot;addNewIncome&quot;>追加</button>
+            </div>
+          </div>
+        </div>
+        <div class=&quot;income-section&quot;>
+          <h2>月ごとの収入</h2>
+          <ul>
+            <li v-for=&quot;(income, month) in monthlyIncomes&quot; :key=&quot;month&quot;>
+              {{ month }}: {{ income }} 円
+              <button class=&quot;button is-danger is-small&quot; v-on:click=&quot;deleteIncome(month)&quot;>削除</button>
+            </li>
+          </ul>
+        </div>
+        <h2>支出の記録</h2>
+          <div class=&quot;columns&quot;>
+            <div class=&quot;column&quot;>
+              <label class=&quot;label&quot;>日付</label>
+              <input class=&quot;input&quot; type=&quot;date&quot; v-model=&quot;newItemDate&quot;>
+            </div>
+            <div class=&quot;column&quot;>
+              <label class=&quot;label&quot;>項目</label>
+              <input class=&quot;input&quot; type=&quot;text&quot; v-model=&quot;newItemName&quot;>
+            </div>
+            <div class=&quot;column&quot;>
+              <label class=&quot;label&quot;>金額</label>
+              <input class=&quot;input&quot; type=&quot;number&quot; v-model=&quot;newItemPrice&quot;>
+            </div>
+            <div class=&quot;column&quot;>
+              <button class=&quot;button is-primary&quot; v-on:click=&quot;addNewItem&quot;>追加</button>
+            </div>
+          </div>
          <div class=&quot;monthly-totals&quot;>
-          <h2>月ごとの合計金額</h2>
+          <h2>月ごとの合計支出額</h2>
           <ul>
             <li v-for=&quot;(total, month) in monthlyTotals&quot; :key=&quot;month&quot;>
               {{ month }}: {{ total }} 円
             </li>
           </ul>
         </div>
-        <button class=&quot;button is-danger&quot; v-on:click=&quot;clearAllData&quot;>一括リセット</button>
-         <div class=&quot;columns&quot;>
-           <div class=&quot;column&quot;>
-             <label class=&quot;label&quot;>日付</label>
-             <input class=&quot;input&quot; type=&quot;date&quot; v-model=&quot;newItemDate&quot;>
-           </div>
-           <div class=&quot;column&quot;>
-             <label class=&quot;label&quot;>項目</label>
-             <input class=&quot;input&quot; type=&quot;text&quot; v-model=&quot;newItemName&quot;>
-           </div>
-           <div class=&quot;column&quot;>
-             <label class=&quot;label&quot;>金額</label>
-             <input class=&quot;input&quot; type=&quot;number&quot; v-model=&quot;newItemPrice&quot;>
-           </div>
-           <div class=&quot;column&quot;>
-             <button class=&quot;button is-primary&quot; v-on:click=&quot;addNewItem&quot;>追加</button>
-           </div>
-         </div>
          <table class=&quot;table&quot; v-if=&quot;Object.keys(organizedItemsByMonth).length&quot;>
            <thead>
              <tr>
@@ -97,7 +123,12 @@
               newItemName: &quot;&quot;,
               newItemPrice: 0,
               items: [],
-              monthlyTotals: {} },
+              monthlyTotals: {},
+
+              newIncomeMonth: &quot;&quot;,
+              newIncomeAmount: 0,
+              monthlyIncomes: {}
+            },
             
               /**
                 * 表を月ごとに切り替える
@@ -116,6 +147,41 @@
                 }
               },
             methods: {
+                /**
+                  * 各月の収入を記録
+                  */
+                addNewIncome: function () {
+                  if (!this.newIncomeMonth || !this.newIncomeAmount) {
+                    alert(&quot;月と金額を入力してください&quot;);
+                    return;
+                  }
+                  this.monthlyIncomes[this.newIncomeMonth] = this.newIncomeAmount;
+                  this.clearNewIncome();
+                  this.saveIncomesToLocalStorage();
+                },
+                clearNewIncome: function () {
+                  this.newIncomeMonth = &quot;&quot;;
+                  this.newIncomeAmount = 0;
+                },
+                saveIncomesToLocalStorage: function () {
+                  localStorage.setItem('monthlyIncomes', JSON.stringify(this.monthlyIncomes));
+                },
+                loadIncomesFromLocalStorage: function () {
+                  const storedIncomes = localStorage.getItem('monthlyIncomes');
+                  if (storedIncomes) {
+                    this.monthlyIncomes = JSON.parse(storedIncomes);
+                  }
+                },
+                /**
+                  * 月ごとの収入を削除
+                  * @param {string} month - 削除する月
+                  */
+                  deleteIncome: function (month) {
+                    if (confirm(`${month} の収入を削除しますか？`)) {
+                      this.$delete(this.monthlyIncomes, month);
+                      this.saveIncomesToLocalStorage();
+                    }
+                  },
               /**
                 * 日付と項目の入力チェック結果を取得
                 * @returns {boolean}
@@ -142,8 +208,10 @@
                   */
                 clearAllData: function () {
                   if (confirm(&quot;本当にすべてのデータをリセットしますか？&quot;)) {
+                    localStorage.removeItem(&quot;monthlyIncomes&quot;);
                     localStorage.removeItem(&quot;items&quot;);
                     localStorage.removeItem(&quot;monthlyTotals&quot;);
+                    this.monthlyIncomes = {};
                     this.items = [];
                     this.monthlyTotals = {};
                   }
@@ -193,8 +261,18 @@
                       * アイテムをリストから削除
                       */
                     deleteItem: function (index) {
+                        const deletedItem = this.items[index];
                         this.items.splice(index, 1);
+                        this.updateMonthlyTotal(deletedItem.date, -deletedItem.price);
                         this.saveItemsToLocalStorage();
+
+                    /**
+                      * 削除後の月ごとの合計支出額が0であれば、その月の表示も削除
+                      */
+                      const monthYear = new Date(deletedItem.date).toLocaleString(&quot;en-US&quot;, { year: &quot;numeric&quot;, month: &quot;numeric&quot; });
+                      if (this.monthlyTotals[monthYear] === 0) {
+                        this.$delete(this.monthlyTotals, monthYear);
+                      }
                       },
                     /**
                       * アイテムリスト内の合計金額を取得
@@ -229,6 +307,7 @@
                     * アプリケーションがマウントされたときにlocalStorageからデータを読み込む
                     */
                     mounted: function () {
+                      this.loadIncomesFromLocalStorage();
                       this.loadItemsFromLocalStorage();
                       const storedMonthlyTotals = localStorage.getItem('monthlyTotals');
                       if (storedMonthlyTotals) {

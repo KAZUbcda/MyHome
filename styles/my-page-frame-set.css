@@ -1,3 +1,17 @@
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd;
+  box-shadow:0 0 8px #bbb inset ;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8fffd4;
+  border-radius: 50px;
+}
+
 .columns{
   display: flex;
   text-align: center;
@@ -25,4 +39,8 @@
 
 .button.is-danger{
   margin-left: 80px;
+}
+
+.input::placeholder{
+  color: #000;
 }

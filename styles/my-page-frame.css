@@ -6,7 +6,7 @@
   border: 0;
   background: var(--cp-color-1);
   display: block;
-  overflow: auto;
+  overflow: hidden;
   width: 95%;
   height: 100%;
   margin: 0 auto;
