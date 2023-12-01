@@ -19,9 +19,60 @@
   margin-right: 0rem;
 }
 
+.title-content{
+  margin: 10px 100px 0 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .title{
-  padding-left: 50px;
   letter-spacing: 0.2rem;
+}
+
+.content-b{
+  margin-top: 2.5px;
+}
+
+.sub-title{
+  text-align: center;
+}
+
+.sub-title h2{
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px 0;
+  border-top: solid 2px #ddd;
+}
+
+.income-form{
+  /* margin-left: 80px; */
+}
+
+.column-income{
+  margin: 0 60px;
+}
+
+.purpose{
+  margin: 10px 0 10px 30px;
+}
+
+.purpose h2{
+  font-size: 18px;
+}
+
+.purpose h2 span{
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ul-amount{
+  text-align: center;
+}
+
+ul li.amount{
+  font-size: 20px;
+  margin: 10px 0;
 }
 
 .table{
@@ -42,5 +93,6 @@
 }
 
 .input::placeholder{
-  color: #000;
+  text-align: center;
+  color: #888;
 }
