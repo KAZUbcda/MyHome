@@ -6,7 +6,20 @@ body{
 }
 
 .title{
+  display: flex;
+  justify-content: space-around;
+}
+
+.title1{
   padding: 10px 0;
   font-size: 50px;
   font-weight: bold;
+}
+
+a{
+  text-decoration: none;
+}
+
+.title2{
+  margin-top: 50px;
 }
