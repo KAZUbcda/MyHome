@@ -63,6 +63,7 @@ textarea{
   border: 4px outset rgb(158, 231, 255);
 }
 
+/* ボタンをクリックするとボタンが凹む表現 */
 .login_button button:active,
 .send_button button:active{
   background-color: deepskyblue;
