@@ -16,10 +16,20 @@ body{
   font-weight: bold;
 }
 
-a{
+.anchor{
   text-decoration: none;
+}
+  
+.anchor:hover{
+  text-decoration: underline;
+}
+
+.anchor{
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2.5px;
 }
 
 .title2{
-  margin-top: 50px;
+  margin-top: 40px;
 }
