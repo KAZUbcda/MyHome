@@ -115,29 +115,29 @@
   // ページが読み込まれた時に実行されるコード
   $(document).ready(function() {
       // ローカルストレージからデータを取得
-      var storedIncomeData = localStorage.getItem('incomeData');
-      var storedExpenseData = localStorage.getItem('expenseData');
+      var storedIncomeData1 = localStorage.getItem('incomeData1');
+      var storedExpenseData1 = localStorage.getItem('expenseData1');
 
       // データが存在するか確認
-      if (storedIncomeData && storedExpenseData) {
+      if (storedIncomeData1 && storedExpenseData1) {
         // JSON.parseを使用して文字列から元のデータ型に変換
-        var incomeData = JSON.parse(storedIncomeData);
-        var expenseData = JSON.parse(storedExpenseData);
+        var incomeData1 = JSON.parse(storedIncomeData1);
+        var expenseData1 = JSON.parse(storedExpenseData1);
 
         // フォームの初期化
-        $('.ji').val(incomeData[0]);
-        $('.fi').val(incomeData[1]);
-        $('.mi').val(incomeData[2]);
-        $('.ai').val(incomeData[3]);
-        $('.myi').val(incomeData[4]);
-        $('.jni').val(incomeData[5]);
+        $('.ji').val(incomeData1[0]);
+        $('.fi').val(incomeData1[1]);
+        $('.mi').val(incomeData1[2]);
+        $('.ai').val(incomeData1[3]);
+        $('.myi').val(incomeData1[4]);
+        $('.jni').val(incomeData1[5]);
 
-        $('.jyi').val(expenseData[0]);
-        $('.ati').val(expenseData[1]);
-        $('.si').val(expenseData[2]);
-        $('.oi').val(expenseData[3]);
-        $('.ni').val(expenseData[4]);
-        $('.di').val(expenseData[5]);
+        $('.jyi').val(expenseData1[0]);
+        $('.ati').val(expenseData1[1]);
+        $('.si').val(expenseData1[2]);
+        $('.oi').val(expenseData1[3]);
+        $('.ni').val(expenseData1[4]);
+        $('.di').val(expenseData1[5]);
 
         // グラフの設定
         myBar = new Chart(ctx, {
@@ -147,7 +147,7 @@
             datasets: [
               {
                 label: "あなたの収入",
-                data: incomeData,
+                data: incomeData1,
                 backgroundColor: [
                   "#3fcf3f",
                   "#3fcf3f",
@@ -159,7 +159,7 @@
               },
               {
                 label: "あなたの支出",
-                data: expenseData,
+                data: expenseData1,
                 backgroundColor: [
                   "#ff6347",
                   "#ff6347",
@@ -254,8 +254,8 @@
       }
     });
     // データをlocalStorageに保存
-    saveToLocalStorage('incomeData', [ji, fi, mi, ai, myi, jni]);
-    saveToLocalStorage('expenseData', [jyi, ati, si, oi, ni, di]);
+    saveToLocalStorage('incomeData1', [ji, fi, mi, ai, myi, jni]);
+    saveToLocalStorage('expenseData1', [jyi, ati, si, oi, ni, di]);
 });
 
     // localStorageにデータを保存する関数
