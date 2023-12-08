@@ -4,7 +4,7 @@ if( header != null) {
   <div class="header_container">
     <!-- ヘッダー左側 -->
     <div class="header_left">
-      <div class="header_title"><a href="TopPage.html">MY HOME</a></div>
+      <div class="header_title"><a href="index.html">MY HOME</a></div>
     </div>
     <!-- ヘッダー左側ここまで -->
     <!-- ヘッダー右側 -->
